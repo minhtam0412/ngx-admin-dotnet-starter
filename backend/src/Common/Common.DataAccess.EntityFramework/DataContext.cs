@@ -21,10 +21,12 @@ namespace Common.DataAccess.EntityFramework
         public DbSet<UserClaim> UserClaims { get; set; }
         public DbSet<UserPhoto> UserPhotos { get; set; }
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<Member> Members { get; set; }
 
         protected void InitContextSettings()
         {
-            Database.SetInitializer(new DataContextInitializer());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Migrations.Configuration>());
+            //Database.SetInitializer(new DataContextInitializer());
             Configuration.LazyLoadingEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
         }
